@@ -24,7 +24,7 @@ public class LoginView extends Dialog {
         super();
 
         Image image = new Image();
-        image.setSrc("https://seu.edu.bd/images/logo_1.png");
+        image.setSrc("https://www.wcupa.edu/_services/STU/ramsEyeView/images/wcuSeal.png");
 
         TextField usernameField = new TextField("Username", "Your 13 digit ID");
         PasswordField passwordField = new PasswordField("Password", "Your password");
@@ -33,25 +33,25 @@ public class LoginView extends Dialog {
         loginButton.addClickShortcut(Key.ENTER);
         Label statusLabel = new Label();
 
-//        loginButton.addClickListener(event -> {
-//            LoginToken loginToken = authenticationService.authenticate(usernameField.getValue(),
-//                    passwordField.getValue());
-//
-//            switch (loginToken.getRole()) {
-//                case "student":
-//                case "faculty":
-//                    httpSession.setAttribute("user", loginToken);
-//                    loginButton.getUI().ifPresent(ui -> ui.navigate(loginToken.getRole()));
-//                    break;
-//                case "norole":
-//                    httpSession.setAttribute("user", loginToken);
-//                    statusLabel.setText("Incorrect username/password");
-//                    break;
-//                default:
-//                    break;
-//            }
-//            //ui.navigate("faculty");
-//        });
+       loginButton.addClickListener(event -> {
+           LoginToken loginToken = authenticationService.authenticate(usernameField.getValue(),
+                   passwordField.getValue());
+
+           switch (loginToken.getRole()) {
+               case "student":
+               case "HR":
+                   httpSession.setAttribute("user", loginToken);
+                   loginButton.getUI().ifPresent(ui -> ui.navigate(loginToken.getRole()));
+                   break;
+               case "norole":
+                   httpSession.setAttribute("user", loginToken);
+                   statusLabel.setText("Incorrect username/password");
+                   break;
+               default:
+                   break;
+           }
+           
+       });
 
         FormLayout formLayout = new FormLayout();
         formLayout.add(image, usernameField, passwordField, loginButton, statusLabel);
